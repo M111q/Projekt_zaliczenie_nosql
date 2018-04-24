@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-mongoexport -c crime --out=crime_temp.geojson
+mongoexport -c crime_export --out=crime_temp.geojson
 
 sed -i 's/location/geometry/;s/$/ , /;$s/ , $//g' crime_temp.geojson 
 

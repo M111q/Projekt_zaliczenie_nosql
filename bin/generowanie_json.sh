@@ -13,6 +13,7 @@ cat temp | while read line
 do
   
 tablica=($line)
+type_of_crime=`echo "${tablica[4]}" | tr '[:upper:]' '[:lower:]'`
 echo -e "
  {
     \"type\": \"Feature\",
@@ -24,7 +25,7 @@ echo -e "
       ]
     },
     \"properties\": {
-      \"type_of_crime\": ${tablica[4]},
+      \"type_of_crime\": $type_of_crime,
       \"year\": ${tablica[6]},
       \"month\": ${tablica[8]},
       \"day\": ${tablica[10]},
