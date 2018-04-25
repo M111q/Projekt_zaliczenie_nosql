@@ -1,5 +1,7 @@
 # Projekt_zaliczenie_nosql
+## Ruby Driver
 
+### Wykorzystane dane:
 [Crime in Vancouver](https://www.kaggle.com/wosaku/crime-in-vancouver/data)
 
 Data of crimes in Vancouver (Canada) from 2003 to 2017
@@ -19,7 +21,7 @@ Columns:
 
 ## Przygotowanie json z pliku crime.csv
 ```bash
-generowanie_json.sh
+./generowanie_json.sh
 ```
 
 ## Import danych (wygenerowany json) do mongo:
@@ -31,22 +33,30 @@ generowanie_json.sh
 ```bash
 ./ustaw_baze.rb
 ```
+Tworzy geo_indeks potrzebny do skryptu punkty_w_okolicy.rb
 
-## Pobiera typ zbrodni i liczy centroide danego typu zbrodni
+## Wypisanie przestępstw w podanej okolicy
+```bash
+./punkty_w_okolicy.rb
+```
+Pobiera długosc i szerokość geograficzną od użytkownika i liczy ilość zbrodni w okolicy ("$minDistance" : 1000, "$maxDistance" : 5000). Następnie skrypt pyta użytkownika czy zapisac w kolekcji crime_export wyszukane zbrodnie.
+
+## Wyliczanie centroidy podanego prze użytkownika przestępstwa
 ```bash
 ./centroid_crime.rb
 ```
-Następnie wynik zapisuję w kolekcji
+Pobiera typ zbrodni i liczy centroide danego typu przestępstwa. Następnie wynik zapisuję w kolekcji.
 
-## Wyświetla liczbę zbrodnia wybranym miesiącu
+## Wyświetla liczbę zbrodni każdego typu w wybranym miesiącu
 ```bash
 ./policz_w_miesiacu.rb
 ```
-Pobiera rok i miesiąc od użytkownika a następnie wyświetla ilość zarejestrowanych przestępstw w wybranym czasie
+Pobiera rok i miesiąc od użytkownika a następnie wyświetla ilość zarejestrowanych przestępstw w wybranym czasie.
 
 ## Eksportuje dane z kolekcji crime_export do formatu geojson
 ```bash
 ./export_geojson.sh
 ```
+ Utworzony zostaje plik crime.geojson
  
-[Przykladowe dane](https://github.com/M111q/Projekt_zaliczenie_nosql/blob/master/data/crime.geojson)
+[Przykladowy GEOJSON](https://github.com/M111q/Projekt_zaliczenie_nosql/blob/master/data/crime.geojson)
