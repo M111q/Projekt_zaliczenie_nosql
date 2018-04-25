@@ -1,3 +1,5 @@
+# Gierszewski Mikołaj
+
 # Projekt_zaliczenie_nosql
 ## Ruby Driver
 
@@ -18,6 +20,11 @@ Columns:
 1) Y - Coordinate values projected in UTM Zone 10 - numeric
 1) Latitude - Coordinate values converted to Latitude - numeric
 1) Longitude - Coordinate values converted to Longitude - numeric
+
+|TYPE | YEAR | MONTH | DAY | HOUR | MINUTE | HUNDRED_BLOCK | NEIGHBOURHOOD | X | Y | Latitude |	Longitude
+|-|-|-|-|-|-|-|-|-|-|-|-|	 		 	 	
+Other Theft |	2003 |	5 |	12 |	16 |	15 |	9XX TERMINAL AVE |	Strathcona |	493906.5 |	5457452.47 |	49.26980201 |	-123.0837633|
+Other Theft |	2003 |	5 |	7 |	15 |	20 |	9XX TERMINAL AVE |	Strathcona |	493906.5 |	5457452.47 |	49.26980201 |	-123.0837633|
 
 ## Przygotowanie json z pliku crime.csv
 ```bash
