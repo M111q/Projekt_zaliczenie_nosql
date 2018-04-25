@@ -5,5 +5,9 @@
 | replica sets | {w:2,j:true,wtimeout:500} | 32.956 | 17.39 | 0.544 |
 | replica sets | {w:1,j:true,wtimeout:500} | 33.312 | 17.446 | 0.51 |
 
-system Ubuntu 
-dane: Police_Sample.csv  500 000 wierszy
+## system: 
+Ubuntu 
+## dane:
+Police_Sample.csv  500 000 wierszy
+## komputer:
+PC, dysk HDD, 12GB pamięci RAM, procesor Intel® Core™ i5 2,5Ghz: 2 Rdzenie, 4 Wątki 
