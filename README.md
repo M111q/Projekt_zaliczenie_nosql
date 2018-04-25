@@ -42,11 +42,30 @@ Other Theft |	2003 |	5 |	7 |	15 |	20 |	9XX TERMINAL AVE |	Strathcona |	493906.5 
 ```
 Tworzy geo_indeks potrzebny do skryptu punkty_w_okolicy.rb
 
+```ruby
+coll.indexes.create_one( { "location"=> "2dsphere" } )
+```
+
 ## Wypisanie przestępstw w podanej okolicy
 ```bash
 ./punkty_w_okolicy.rb
 ```
 Pobiera długosc i szerokość geograficzną od użytkownika i liczy ilość zbrodni w okolicy ("$minDistance" : 1000, "$maxDistance" : 5000). Następnie skrypt pyta użytkownika czy zapisac w kolekcji crime_export wyszukane zbrodnie.
+
+```ruby
+matched_crime = coll.find(
+  {
+    "location"=>
+      { "$near"=>
+        {
+          "$geometry"=> { "type"=> "Point",  "coordinates"=> [ longitude_to_search.to_f, latitude_to_search.to_f ] },
+          "$minDistance"=> 1000,
+          "$maxDistance"=> 5000
+        }
+      }
+   }
+).limit(200).to_a
+```
 
 ## Wyliczanie centroidy podanego prze użytkownika przestępstwa
 ```bash
@@ -54,12 +73,27 @@ Pobiera długosc i szerokość geograficzną od użytkownika i liczy ilość zbr
 ```
 Pobiera typ zbrodni i liczy centroide danego typu przestępstwa. Następnie wynik zapisuję w kolekcji.
 
+```ruby
+ag = coll.aggregate([
+	{"$match"=> {"properties.type_of_crime": type_to_search}},
+  {"$replaceRoot"=> { newRoot: "$location" }},
+  {"$project"=>	{ "type": 1, szerokosc: { "$arrayElemAt"=> [ "$coordinates", 0 ] },dlugosc: { "$arrayElemAt"=> [ "$coordinates", -1 ] }}},
+  {"$group"=> { _id: type_to_search ,srednia_szerokosc: { "$avg" => "$szerokosc"}, srednia_dlugosc: { "$avg"=> "$dlugosc"} } }
+] )
+```
+
 ## Wyświetla liczbę zbrodni każdego typu w wybranym miesiącu
 ```bash
 ./policz_w_miesiacu.rb
 ```
 Pobiera rok i miesiąc od użytkownika a następnie wyświetla ilość zarejestrowanych przestępstw w wybranym czasie.
 
+```ruby
+all_chosen_crimes = coll.find({ "properties.year"=> year_to_search.to_i,
+"properties.month"=> month_to_search.to_i })
+
+puts all_crimes.group_by{|e| e}.map{|k, v| [k, v.length]}.to_h
+```
 ## Eksportuje dane z kolekcji crime_export do formatu geojson
 ```bash
 ./export_geojson.sh
