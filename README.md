@@ -22,12 +22,12 @@ Columns:
 generowanie_json.sh
 ```
 
-## import danych (wygenerowany json) do mongo:
+## Import danych (wygenerowany json) do mongo:
 ```bash
 ./importowanie.sh
 ```
 
-## utworzenie geo-indeksu 
+## Utworzenie geo-indeksu 
 ```bash
 ./ustaw_baze.rb
 ```
@@ -43,3 +43,10 @@ Następnie wynik zapisuję w kolekcji
 ./policz_w_miesiacu.rb
 ```
 Pobiera rok i miesiąc od użytkownika a następnie wyświetla ilość zarejestrowanych przestępstw w wybranym czasie
+
+## Eksportuje dane z kolekcji crime_export do formatu geojson
+```bash
+./export_geojson.sh
+```
+ 
+[Przykladowe dane](https://github.com/M111q/Projekt_zaliczenie_nosql/blob/master/data/crime.geojson)
