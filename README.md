@@ -94,6 +94,9 @@ all_chosen_crimes = coll.find({ "properties.year"=> year_to_search.to_i,
 
 puts all_crimes.group_by{|e| e}.map{|k, v| [k, v.length]}.to_h
 ```
+
+![policz w miesiacu](policz_w_miesiacu.png)
+
 ## Eksportuje dane z kolekcji crime_export do formatu geojson
 ```bash
 ./export_geojson.sh
@@ -101,3 +104,6 @@ puts all_crimes.group_by{|e| e}.map{|k, v| [k, v.length]}.to_h
  Utworzony zostaje plik crime.geojson
  
 [Przykladowy GEOJSON](https://github.com/M111q/Projekt_zaliczenie_nosql/blob/master/data/crime.geojson)
+
+
+
