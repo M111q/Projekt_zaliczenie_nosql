@@ -46,6 +46,14 @@ Tworzy geo_indeks potrzebny do skryptu punkty_w_okolicy.rb
 coll.indexes.create_one( { "location"=> "2dsphere" } )
 ```
 
+## Pokolorowanie punktów geojson
+```bash
+./pokoloruj.rb
+```
+Użytkownik podaje typ przestępstwa i kolor na jaki mają być pokolorowane punkty na mapie oznaczające dane przestępstwo
+
+[Przykładowy pokolorowany geojson](https://github.com/M111q/Projekt_zaliczenie_nosql/blob/master/data/crime_pokoloruj.geojson)
+
 ## Wypisanie przestępstw w podanej okolicy
 ```bash
 ./punkty_w_okolicy.rb
@@ -67,7 +75,7 @@ matched_crime = coll.find(
 ).limit(200).to_a
 ```
 
-## Wyliczanie centroidy podanego prze użytkownika przestępstwa
+## Wyliczanie centroidy podanego przez użytkownika przestępstwa
 ```bash
 ./centroid_crime.rb
 ```
